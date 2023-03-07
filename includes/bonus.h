@@ -1,26 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base_ul.c                                :+:      :+:    :+:   */
+/*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:45:05 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/07 09:42:30 by ztrottie         ###   ########.fr       */
+/*   Created: 2023/03/07 11:51:44 by ztrottie          #+#    #+#             */
+/*   Updated: 2023/03/07 11:51:45 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
-
-int	ft_putnbr_base_ul(unsigned long nbr)
-{
-	unsigned long	nb;
-	char			*hexa;
-
-	hexa = "0123456789abcdef";
-	nb = nbr;
-	if (nb / 16 != 0)
-		ft_putnbr_base_ul((nb / 16));
-	ft_putchar_fd(hexa[nb % 16], 1);
-	return (ft_hexa_len(nbr));
-}

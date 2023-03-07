@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 10:31:42 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/02 16:57:01 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/07 09:42:49 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	ft_putnbr_base(unsigned int nbr, char maj)
 	else
 		hexa = "0123456789abcdef";
 	nb = nbr;
-	if (nb / ft_strlen(hexa) != 0)
-		ft_putnbr_base((nb / ft_strlen(hexa)), maj);
-	ft_putchar_fd(hexa[nb % ft_strlen(hexa)], 1);
+	if (nb / 16 != 0)
+		ft_putnbr_base((nb / 16), maj);
+	ft_putchar_fd(hexa[nb % 16], 1);
 	return (ft_hexa_len(nbr));
 }

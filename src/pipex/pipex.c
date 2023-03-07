@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base_ul.c                                :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/23 13:45:05 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/07 09:42:30 by ztrottie         ###   ########.fr       */
+/*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
+/*   Updated: 2023/03/07 13:18:44 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/ft_printf.h"
+#include "../../includes/pipex.h"
 
-int	ft_putnbr_base_ul(unsigned long nbr)
+int	main(int argc, char **argv, char **env)
 {
-	unsigned long	nb;
-	char			*hexa;
-
-	hexa = "0123456789abcdef";
-	nb = nbr;
-	if (nb / 16 != 0)
-		ft_putnbr_base_ul((nb / 16));
-	ft_putchar_fd(hexa[nb % 16], 1);
-	return (ft_hexa_len(nbr));
+	t_pipex	*pipex;
+	
+	if (argc != 5)
+		return (0);
+	pipex = ft_calloc(1, sizeof(t_pipex));
+	pipex->path = ft_split(env[2] + 5, ':');
 }

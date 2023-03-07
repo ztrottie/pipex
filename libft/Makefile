@@ -47,14 +47,14 @@ MEM_SRCS	=	ft_bzero.c \
 				ft_memmove.c \
 				ft_memset.c
 
-PRINT_DIR	=	ft_hexa_len.c \
+PRINT_SRCS	=	ft_hexa_len.c \
 				ft_pointer.c \
 				ft_printf.c \
 				ft_putnbr_base_ul.c \
 				ft_putnbr_base.c \
 				ft_putnbr_len.c \
 				ft_putnbr_printf.c \
-				ft_putrnbr_u.c \
+				ft_putnbr_u.c \
 				ft_putstr_printf.c
 
 STR_SRCS	=	ft_split.c \

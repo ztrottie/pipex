@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/18 14:55:51 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:10:49 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static void	get_files(char **argv, t_pipex *var)
 	var->outfile = open(argv[4], O_RDWR, O_CREAT, O_TRUNC, 0644);
 	if (var->outfile < 0)
 		ft_error("Invalid fd");
+}
+
+static void set_variables()
+{
+	
 }
 
 int	main(int argc, char **argv, char **env)

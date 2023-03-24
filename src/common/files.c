@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   files.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/18 13:03:46 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/24 16:04:06 by ztrottie         ###   ########.fr       */
+/*   Created: 2023/03/20 14:56:31 by ztrottie          #+#    #+#             */
+/*   Updated: 2023/03/21 14:34:26 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../../includes/common.h"
+#include "../../includes/common.h"
 
-void	ft_free_all(t_pipex	*var)
+void	get_files(char **argv, t_pipex *var)
 {
-	int	i;
-
-	i = 0;
-	while (var->path[i])
-	{
-		ft_free(var->path[i]);
-		i++;
-	}
-	i = 0;
-	ft_free(var->path);
-	ft_free(var->cmd);
-}
-
-void	ft_exit(char *error, t_pipex *var)
-{
-	ft_free_all(var);
-	perror(error);
-	exit(errno);
+	var->infile = open(argv[1], O_RDONLY);
+	var->outfile = open(argv[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (var->infile < 0)
+		ft_exit(argv[1], var);
+	if (var->outfile < 0)
+		ft_exit(argv[4], var);
 }

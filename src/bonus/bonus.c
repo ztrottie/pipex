@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   bonus.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/21 14:41:44 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/24 16:33:13 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/pipex.h"
+#include "../../includes/bonus.h"
 
 static void set_variables(t_pipex *var, int argc, char **argv, char **env)
 {
@@ -23,60 +23,65 @@ static void set_variables(t_pipex *var, int argc, char **argv, char **env)
 	get_commands(var);
 }
 
-static void	child_process(t_pipex *var, int	end[2], char **env)
+static void	child_process(t_pipex *var, char **env, int index)
 {
-	int	cmd_path_index;
+	int	end[2];
+	int cmd_path_index;
 
-	if (dup2(var->infile, STDIN_FILENO) < 0)
-		ft_exit("dup2:", var);
-	if (dup2(end[1], STDOUT_FILENO) < 0)
-		ft_exit("dup2:", var);
-	close(end[0]);
-	close(var->infile);
-	cmd_path_index = valid_command(var, 1);
+	pipe(end);
+	get_in_out(var, index, end);
+	close_in_out(var, index, end);
+	cmd_path_index = valid_command(var, index);
 	if (cmd_path_index > 0)
-		exec_command(var, cmd_path_index, 0, env);
+		exec_command(var, cmd_path_index, index, env);
 	else
 		exit(0);
 }
 
-static void	parent_process(t_pipex *var, int end[2], char **env)
+static void	parent_process(t_pipex *var, t_pid *pid_list)
 {
-	int	cmd_path_index;
+	t_pid	*ptr;
+	int		status;
 
-	if (dup2(var->outfile, STDOUT_FILENO) < 0)
-		ft_exit("dup2:", var);
-	if (dup2(end[0], STDIN_FILENO) < 0)
-		ft_exit("dup2:", var);
-	close(end[1]);
-	close(var->outfile);
-	cmd_path_index = valid_command(var, 2);
-	if (cmd_path_index > 0)
-		exec_command(var, cmd_path_index, 1, env);
-	else
-		exit(0);
+	ptr = pid_list;
+	while (ptr != NULL)
+	{
+		waitpid(ptr->pid, &status, 0);
+		ptr = ptr->next;
+	}
+	pid_free_list(&pid_list);
+	ft_free_all(var);
+	exit(0);
 }
 
 static void	pipex(t_pipex *var, char **env)
 {
-	int		end[2];
-	pid_t	pid;
+	t_pid	*pid_list;
+	int		pid;
+	int		i;
 
-	pipe(end);
-	pid = fork();
-	if (pid < 0)
-		ft_exit("FORK:", var);
-	if (!pid)
-		child_process(var, end, env);
-	else
-		parent_process(var, end, env);
+	i = -1;
+	pid_list = 0;
+	while (++i < var->argc - 2)
+	{
+		pid = fork();
+		if (pid < 0)
+			perror("fork");
+		if (!pid)
+			child_process(var, env, i);
+		else
+		{
+			pid_add_end(&pid_list, pid);
+			parent_process(var, pid_list);
+		}
+	}
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex var;
 
-	if (argc != 5)
+	if (argc < 5)
 		return (0);
 	set_variables(&var, argc, argv, env);
 	get_files(argv, &var);

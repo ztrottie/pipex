@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:50:49 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/02 16:30:29 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:31:00 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_free(void *p);
+void	*ft_x2free(void **p);
 
 #endif

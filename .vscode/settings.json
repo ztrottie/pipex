@@ -3,7 +3,10 @@
 		"ft_printf.h": "c",
 		"string.h": "c",
 		"pipex.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"unistd.h": "c",
+		"common.h": "c",
+		"bonus.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

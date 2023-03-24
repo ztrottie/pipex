@@ -120,6 +120,7 @@ ${BINDIR}%.o: ${WRITE_DIR}%.c
 	@${CC} ${CFLAGS} -I${INCDIR} -I. -c $< -o $@
 
 $(NAME): $(COMP_OBJS) $(CONV_OBJS) $(GET_OBJS) $(LIST_OBJS) $(MEM_OBJS) $(PRINT_OBJS) $(STR_OBJS) $(WRITE_OBJS)
+	@echo "compiling libft"
 	@ar -rcs  $(NAME) $(COMP_OBJS) $(CONV_OBJS) $(GET_OBJS) $(LIST_OBJS) $(MEM_OBJS) $(PRINT_OBJS) $(STR_OBJS) $(WRITE_OBJS)
  
 clean:  

@@ -6,11 +6,25 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:38:26 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/02 16:31:16 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/21 12:31:15 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/memory.h"
+
+void	*ft_x2free(void **p)
+{
+	int	i;
+
+	if (p)
+	{
+		i = -1;
+		while (p[++i])
+			ft_free(p[i]);
+		ft_free(p);
+	}
+	return (NULL);
+}
 
 void	*ft_free(void *p)
 {

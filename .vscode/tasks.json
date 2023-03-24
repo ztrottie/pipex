@@ -7,10 +7,11 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${workspaceFolder}/src/pipex/*.c",
+                "${workspaceFolder}/src/common/*.c",
+                "${workspaceFolder}/src/bonus/*.c",
                 "${workspaceFolder}/libft/libft.a",
                 "-o",
-                "${workspaceFolder}/pipex"
+                "${workspaceFolder}/pipex_bonus"
             ],
             "options": {
                 "cwd": "${fileDirname}"

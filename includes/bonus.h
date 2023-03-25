@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:51:44 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/24 16:27:21 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/25 13:58:22 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct	s_pid
 
 void	pid_add_end(t_pid **pid_list, pid_t pid);
 void	pid_free_list(t_pid **pid_list);
-void	get_in_out(t_pipex *var, int index, int end[2]);
-void	close_in_out(t_pipex *var, int index, int end[2]);
+void	get_in_out(t_pipex *var, int index);
+void	close_all(t_pipex *var);
 
 #endif

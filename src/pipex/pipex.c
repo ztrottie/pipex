@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/21 14:41:44 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:12:39 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 5)
 		return (0);
 	set_variables(&var, argc, argv, env);
-	get_files(argv, &var);
+	get_files(argv, &var, 0);
 	pipex(&var, env);
 	return (ft_free_all(&var), 0);
 }

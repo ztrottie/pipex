@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:51:42 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/24 11:40:56 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:18:44 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct 	s_pipex
 	char	**argv;
 	char	**cmd;
 	char	**env;
+	int		**pipe;
 	int		argc;
 	int		infile;
 	int		outfile;

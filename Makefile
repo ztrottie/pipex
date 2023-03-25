@@ -55,7 +55,7 @@ bonus: $(BINDIR) libft files $(NAME2)
 
 $(NAME2): $(BONUS_OBJS) $(COMMON_OBJS)
 	@echo "compiling pipex"
-	@$(CC) $(CFLAGS) $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS) -o $@
+	@$(CC) -g $(CFLAGS) $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS) -o $@
 
 libft:
 	@$(MAKE) -C libft
@@ -66,6 +66,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(NAME2)
 	@$(MAKE) -C libft fclean
 
 re: clean all

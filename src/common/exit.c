@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 13:03:46 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/24 16:04:06 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:43:50 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	ft_free_all(t_pipex	*var)
 		i++;
 	}
 	i = 0;
+	while (i < var->argc - 4)
+	{
+		ft_free(var->pipe[i]);
+		i++;
+	}
+	ft_free(var->pipe);
 	ft_free(var->path);
 	ft_free(var->cmd);
 }

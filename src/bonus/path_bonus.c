@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   path_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 14:59:39 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/21 14:47:36 by ztrottie         ###   ########.fr       */
+/*   Created: 2023/03/26 15:21:28 by ztrottie          #+#    #+#             */
+/*   Updated: 2023/03/26 15:34:04 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/common.h"
+#include "../../includes/bonus.h"
 
-static size_t	ft_word_count(char const *s, char c)
-{
-	size_t	i;
-	size_t	count;
-	int		trigger;
-
-	i = 0;
-	trigger = 1;
-	count = 0;
-	while (i <= ft_strlen(s))
-	{
-		if ((s[i] == c || s[i] == 0) && trigger == 0)
-		{
-			count++;
-			trigger = 1;
-		}
-		else if (s[i] != c && trigger == 1)
-			trigger = 0;
-		i++;
-	}
-	return (count + 1);
-}
-
-static char *find_path(char **env)
+static char	*find_path(char **env)
 {
 	int	i;
 

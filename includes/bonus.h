@@ -6,24 +6,42 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:51:44 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/25 13:58:22 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:36:20 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BONUS_H
 # define BONUS_H
 
-# include "common.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
 
-typedef struct	s_pid
+typedef struct s_pid
 {
 	pid_t			pid;
 	struct s_pid	*next;
 }				t_pid;
 
-void	pid_add_end(t_pid **pid_list, pid_t pid);
-void	pid_free_list(t_pid **pid_list);
-void	get_in_out(t_pipex *var, int index);
-void	close_all(t_pipex *var);
+typedef struct s_pipex
+{
+	char			**path;
+	char			**argv;
+	char			**cmd;
+	char			**env;
+	int				**pipe;
+	int				cmd_count;
+	int				argc;
+	int				infile;
+	int				outfile;
+	struct s_pid	*pid_list;
+}				t_pipex;
+
+void	get_commands(t_pipex *var);
+char	**get_path(char **env);
 
 #endif

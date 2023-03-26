@@ -12,19 +12,17 @@ LIBFT		=	libft/libft.a
 CC			=	gcc
 CFLAGS		=	-Wextra -Werror -Wall
 
-PIPEX_SRCS	=	pipex.c
-
-COMMON_SRCS	=	exit.c \
+PIPEX_SRCS	=	pipex.c \
+				exit.c \
 				files.c \
 				path.c \
 				commands.c
 
 BONUS_SRCS	=	bonus.c \
-				pid_functions.c \
-				fd.c
+				commands_bonus.c \
+				path_bonus.c
 
 PIPEX_OBJS	=	$(addprefix ${BINDIR}, ${PIPEX_SRCS:.c=.o})
-COMMON_OBJS	=	$(addprefix ${BINDIR}, ${COMMON_SRCS:.c=.o})
 BONUS_OBJS	=	$(addprefix ${BINDIR}, ${BONUS_SRCS:.c=.o})
 
 all: $(BINDIR) libft files $(NAME)
@@ -32,20 +30,16 @@ all: $(BINDIR) libft files $(NAME)
 
 files:
 	@touch infile
-	@touch outfile
 
 ${BINDIR}%.o: ${PIPEX_DIR}%.c
-	@${CC} ${CFLAGS} -I${INCDIR} -I. -c $< -o $@
-
-${BINDIR}%.o: ${COMMON_DIR}%.c
-	@${CC} ${CFLAGS} -I${INCDIR} -I. -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
 ${BINDIR}%.o: ${BONUS_DIR}%.c
-	@${CC} ${CFLAGS} -I${INCDIR} -I. -c $< -o $@
+	@${CC} ${CFLAGS} -c $< -o $@
 
-$(NAME): $(PIPEX_OBJS) $(COMMON_OBJS)
+$(NAME): $(PIPEX_OBJS)
 	@echo "compiling pipex"
-	@$(CC) $(CFLAGS) $(LIBFT) $(PIPEX_OBJS) $(COMMON_OBJS) -o $@
+	@$(CC) $(CFLAGS) $(LIBFT) $(PIPEX_OBJS) -o $@
 
 $(BINDIR):
 	@mkdir -p bin
@@ -53,9 +47,9 @@ $(BINDIR):
 bonus: $(BINDIR) libft files $(NAME2)
 	@echo "Pipex Bonus compiled"
 
-$(NAME2): $(BONUS_OBJS) $(COMMON_OBJS)
-	@echo "compiling pipex"
-	@$(CC) -g $(CFLAGS) $(LIBFT) $(BONUS_OBJS) $(COMMON_OBJS) -o $@
+$(NAME2): $(BONUS_OBJS)
+	@echo "compiling Pipex Bonus"
+	@$(CC) -g $(CFLAGS) $(LIBFT) $(BONUS_OBJS) -o $@
 
 libft:
 	@$(MAKE) -C libft
@@ -67,6 +61,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME2)
+	@rm -f infile
 	@$(MAKE) -C libft fclean
 
 re: clean all

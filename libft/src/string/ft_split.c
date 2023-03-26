@@ -6,35 +6,12 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 18:07:34 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/02 16:31:53 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:25:37 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/memory.h"
 #include "../../includes/string.h"
-
-static size_t	ft_word_count(char const *s, char c)
-{
-	size_t	i;
-	size_t	count;
-	int		trigger;
-
-	i = 0;
-	trigger = 1;
-	count = 0;
-	while (i <= ft_strlen(s))
-	{
-		if ((s[i] == c || s[i] == 0) && trigger == 0)
-		{
-			count++;
-			trigger = 1;
-		}
-		else if (s[i] != c && trigger == 1)
-			trigger = 0;
-		i++;
-	}
-	return (count + 1);
-}
 
 static size_t	ft_word_len(char const *s, char c)
 {

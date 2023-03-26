@@ -6,11 +6,11 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 15:01:18 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/25 13:18:04 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/26 14:47:45 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/common.h"
+#include "../../includes/pipex.h"
 
 void	exec_command(t_pipex *var, int path_index, int cmd_index, char **env)
 {
@@ -29,16 +29,17 @@ int	valid_command(t_pipex *var, int cmd_nb)
 	char	*cmd;
 	char	**temp;
 
-	i = -1;
+	i = 0;
 	temp = ft_split(var->cmd[cmd_nb - 1], ' ');
-	while (var->path[++i])
+	while (var->path[i])
 	{
 		cmd = ft_strjoin(var->path[i], temp[0]);
 		if (access(cmd, F_OK | X_OK) == 0)
 			return (ft_free(cmd), ft_x2free((void **)temp), i);
 		ft_free(cmd);
+		i++;
 	}
-	return (ft_x2free((void **)temp), 0);
+	return (ft_x2free((void **)temp), -1);
 }
 
 void	get_commands(t_pipex *var)

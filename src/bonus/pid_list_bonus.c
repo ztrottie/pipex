@@ -1,50 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pid_functions.c                                    :+:      :+:    :+:   */
+/*   pid_list_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/24 15:28:24 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/24 16:39:04 by ztrottie         ###   ########.fr       */
+/*   Created: 2023/03/26 15:47:45 by ztrottie          #+#    #+#             */
+/*   Updated: 2023/03/26 16:20:34 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/bonus.h"
 
-void	pid_free_list(t_pid **pid_list)
+void	pid_list_free(t_pipex *var)
 {
 	t_pid	*ptr;
 	t_pid	*temp;
 
-	ptr = *pid_list;
+	ptr = var->pid_list;
 	while (ptr != NULL)
 	{
 		temp = ptr->next;
 		ft_free(ptr);
 		ptr = temp;
 	}
+	ft_free(var->pid_list);
 }
 
-void	pid_add_end(t_pid **pid_list, pid_t pid)
+void	pid_add_end(t_pipex *var, pid_t pid)
 {
+	int		i;
 	t_pid	*ptr;
-	t_pid	*new;
 
-	if (!*pid_list)
+	if (var->pid_list == 0)
 	{
-		*pid_list = ft_calloc(1, sizeof(t_pid));
-		(*pid_list)->pid = pid;
-		(*pid_list)->next = NULL;
+		var->pid_list = ft_calloc(1, sizeof(t_pid *));
+		var->pid_list->pid = pid;
+		var->pid_list->next = NULL;
 	}
 	else
 	{
-		ptr = *pid_list;
+		ptr = var->pid_list;
 		while (ptr->next != NULL)
 			ptr = ptr->next;
-		new = ft_calloc(1, sizeof(t_pid));
-		ptr->next = new;
-		new->next = NULL;
-		new->pid = pid;
+		ptr->next = ft_calloc(1, sizeof(t_pid *));
+		ptr->next->pid = pid;
+		ptr->next->next = NULL;
 	}
 }

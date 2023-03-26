@@ -70,7 +70,8 @@ STR_SRCS	=	ft_split.c \
 				ft_strnstr.c \
 				ft_strrchr.c \
 				ft_strtrim.c \
-				ft_substr.c
+				ft_substr.c \
+				ft_word_count.c
 
 WRITE_SRCS	=	ft_putchar_fd.c \
 				ft_putendl_fd.c \
@@ -88,7 +89,7 @@ WRITE_OBJS		=	$(addprefix ${BINDIR}, ${WRITE_SRCS:.c=.o})
 
 CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror
- 
+
 all: $(BINDIR) $(NAME)
 	@echo "libft compiled"
 
@@ -122,13 +123,13 @@ ${BINDIR}%.o: ${WRITE_DIR}%.c
 $(NAME): $(COMP_OBJS) $(CONV_OBJS) $(GET_OBJS) $(LIST_OBJS) $(MEM_OBJS) $(PRINT_OBJS) $(STR_OBJS) $(WRITE_OBJS)
 	@echo "compiling libft"
 	@ar -rcs  $(NAME) $(COMP_OBJS) $(CONV_OBJS) $(GET_OBJS) $(LIST_OBJS) $(MEM_OBJS) $(PRINT_OBJS) $(STR_OBJS) $(WRITE_OBJS)
- 
+
 clean:  
 	@rm -fr $(BINDIR)
- 
+
 fclean: clean
 	@rm -f $(NAME)
- 
+
 re: fclean all
 
 .PHONY:	all fclean clean re

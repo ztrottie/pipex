@@ -20,7 +20,11 @@ PIPEX_SRCS	=	pipex.c \
 
 BONUS_SRCS	=	bonus.c \
 				commands_bonus.c \
-				path_bonus.c
+				path_bonus.c \
+				fd_utils_bonus.c \
+				pid_list_bonus.c \
+				get_input_bonus.c \
+				exit_bonus.c
 
 PIPEX_OBJS	=	$(addprefix ${BINDIR}, ${PIPEX_SRCS:.c=.o})
 BONUS_OBJS	=	$(addprefix ${BINDIR}, ${BONUS_SRCS:.c=.o})

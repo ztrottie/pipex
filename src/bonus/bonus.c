@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:06:00 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 16:22:13 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:43:26 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,46 @@
 
 static void	set_variables(t_pipex *var, int argc, char **argv, char **env)
 {
+	ft_bzero(var, sizeof(t_pipex));
 	var->argc = argc;
 	var->argv = argv;
 	var->env = env;
+	open_fd(var);
+	if (var->here_doc == 1)
+		get_input(var);
 	get_commands(var);
 	var->path = get_path(var->env);
+	if (var->path == NULL)
+		ft_exit("PATH", var);
 }
 
 static void	child_process(t_pipex *var, int index)
 {
-	
+	int	path_index;
+
+	path_index = valid_command(var, index);
+	get_in_out(var, index);
+	if (path_index != -1)
+		exec_command(var, path_index, index);
+	else
+		ft_exit(var->cmd[index], var);
 }
 
 static void	parent_process(t_pipex *var)
 {
-	
+	t_pid	*ptr;
+	int		status;
+
+	ptr = var->pid_list;
+	close_all(var);
+	if (var->here_doc)
+		unlink("infile");
+	while (ptr != NULL)
+	{
+		waitpid(ptr->pid, &status, 0);
+		ptr = ptr->next;
+	}
+	ft_exit(NULL, var);
 }
 
 static void	pipex(t_pipex *var)
@@ -37,11 +62,14 @@ static void	pipex(t_pipex *var)
 	pid_t	pid;
 
 	i = 0;
+	get_pipes(var);
 	while (i < var->cmd_count)
 	{
 		pid = fork();
+		if (pid < 0)
+			ft_exit("fork", var);
 		if (!pid)
-			child_process(var);
+			child_process(var, i);
 		else
 			pid_add_end(var, pid);
 		i++;
@@ -56,6 +84,5 @@ int	main(int argc, char **argv, char **env)
 	if (argc < 5)
 		return (0);
 	set_variables(&var, argc, argv, env);
-	for (int i = 0; var.path[i]; i++)
-		ft_printf("%s\n", var.path[i]);
+	pipex(&var);
 }

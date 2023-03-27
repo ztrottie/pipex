@@ -1,0 +1,14 @@
+total 216
+drwxr-xr-x  13 ztrottie  2022_quebec    442 Mar 27 15:17 .
+drwxr-xr-x  10 ztrottie  2022_quebec    340 Mar 26 16:35 ..
+drwxr-xr-x  15 ztrottie  2022_quebec    510 Mar 26 17:59 .git
+drwxr-xr-x   5 ztrottie  2022_quebec    170 Mar  7 12:02 .vscode
+-rw-r--r--   1 ztrottie  2022_quebec   1299 Mar 27 14:33 Makefile
+drwxr-xr-x  18 ztrottie  2022_quebec    612 Mar 27 15:15 bin
+drwxr-xr-x   4 ztrottie  2022_quebec    136 Mar 26 13:08 includes
+-rw-r--r--   1 ztrottie  2022_quebec      0 Mar 27 15:17 infile
+drwxr-xr-x   9 ztrottie  2022_quebec    306 Mar 26 15:36 libft
+-rw-r--r--   1 ztrottie  2022_quebec      0 Mar 27 15:17 outfile
+-rwxr-xr-x   1 ztrottie  2022_quebec  51088 Mar 26 15:19 pipex
+-rwxr-xr-x   1 ztrottie  2022_quebec  51824 Mar 27 15:15 pipex_bonus
+drwxr-xr-x   4 ztrottie  2022_quebec    136 Mar 26 13:08 src

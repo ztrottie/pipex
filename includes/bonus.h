@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 11:51:44 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 15:36:20 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:32:16 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 
 typedef struct s_pid
@@ -34,6 +35,7 @@ typedef struct s_pipex
 	char			**cmd;
 	char			**env;
 	int				**pipe;
+	int				here_doc;
 	int				cmd_count;
 	int				argc;
 	int				infile;
@@ -43,5 +45,15 @@ typedef struct s_pipex
 
 void	get_commands(t_pipex *var);
 char	**get_path(char **env);
+int		valid_command(t_pipex *var, int cmd_nb);	
+void	exec_command(t_pipex *var, int path_index, int cmd_index);
+void	pid_add_end(t_pipex *var, pid_t pid);
+void	pid_list_free(t_pipex *var);
+void	get_pipes(t_pipex *var);
+void	close_all(t_pipex *var);
+void	get_in_out(t_pipex *var, int index);
+void	open_fd(t_pipex *var);
+void	get_input(t_pipex *var);
+void	ft_exit(char *error, t_pipex *var);
 
 #endif

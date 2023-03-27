@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:47:45 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 16:20:34 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 14:38:13 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,16 @@ void	pid_list_free(t_pipex *var)
 	t_pid	*temp;
 
 	ptr = var->pid_list;
-	while (ptr != NULL)
+	while (ptr->next != NULL)
 	{
 		temp = ptr->next;
 		ft_free(ptr);
 		ptr = temp;
 	}
-	ft_free(var->pid_list);
 }
 
 void	pid_add_end(t_pipex *var, pid_t pid)
 {
-	int		i;
 	t_pid	*ptr;
 
 	if (var->pid_list == 0)

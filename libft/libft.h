@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 16:15:11 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/02 15:30:16 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 12:39:24 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@
 # include "includes/string.h"
 # include "includes/write_fd.h"
 # include "includes/ft_printf.h"
+# include "includes/get_next_line.h"
 
 #endif

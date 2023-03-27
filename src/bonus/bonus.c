@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:06:00 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 14:43:26 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:34:29 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	parent_process(t_pipex *var)
 	ptr = var->pid_list;
 	close_all(var);
 	if (var->here_doc)
-		unlink("infile");
+		unlink("/tmp/.infile");
 	while (ptr != NULL)
 	{
 		waitpid(ptr->pid, &status, 0);
@@ -80,8 +80,13 @@ static void	pipex(t_pipex *var)
 int	main(int argc, char **argv, char **env)
 {
 	t_pipex	var;
+	int		argc_limit;
 
-	if (argc < 5)
+	if (ft_strncmp(argv[1], "here_doc\0", 9) == 0)
+		argc_limit = 6;
+	else
+		argc_limit = 5;
+	if (argc < argc_limit)
 		return (0);
 	set_variables(&var, argc, argv, env);
 	pipex(&var);

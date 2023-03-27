@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 11:35:23 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 15:25:55 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:34:53 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	open_fd(t_pipex *var)
 		var->outfile = open(var->argv[var->argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (var->outfile < 0)
 			ft_exit(var->argv[var->argc - 1], var);
-		var->infile = open("infile", O_RDWR | O_CREAT);
+		var->infile = open("/tmp/.infile", O_RDWR | O_CREAT);
 		var->here_doc = 1;
 	}
 	else

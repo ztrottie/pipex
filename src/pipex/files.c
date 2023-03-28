@@ -6,11 +6,19 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 14:56:31 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 13:06:28 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:36:14 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/pipex.h"
+
+void	close_all(t_pipex *var, int end[2])
+{
+	close(var->infile);
+	close(var->outfile);
+	close(end[0]);
+	close(end[1]);
+}
 
 void	get_files(char **argv, t_pipex *var)
 {

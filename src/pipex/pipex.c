@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 14:48:14 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:36:35 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ static void	child_process(t_pipex *var, int end[2], char **env)
 		ft_exit("dup2:", var);
 	if (dup2(end[1], STDOUT_FILENO) < 0)
 		ft_exit("dup2:", var);
-	close(end[0]);
-	close(var->infile);
+	close_all(var, end);
 	cmd_path_index = valid_command(var, 1);
 	if (cmd_path_index > -1)
 		exec_command(var, cmd_path_index, 0, env);
@@ -47,13 +46,11 @@ static void	parent_process(t_pipex *var, int end[2], char **env)
 		ft_exit("dup2:", var);
 	if (dup2(end[0], STDIN_FILENO) < 0)
 		ft_exit("dup2:", var);
-	close(end[1]);
-	close(var->outfile);
+	close_all(var, end);
 	cmd_path_index = valid_command(var, 2);
 	if (cmd_path_index > 0)
 		exec_command(var, cmd_path_index, 1, env);
-	else
-		exit(0);
+	ft_exit(var->cmd[1], var);
 }
 
 static void	pipex(t_pipex *var, char **env)
@@ -76,7 +73,7 @@ int	main(int argc, char **argv, char **env)
 	t_pipex	var;
 
 	if (argc != 5)
-		return (0);
+		return (ft_putstr_fd("need 4 arguments to run\n", 2), 0);
 	set_variables(&var, argc, argv, env);
 	get_files(argv, &var);
 	pipex(&var, env);

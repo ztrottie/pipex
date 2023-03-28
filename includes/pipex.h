@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:37:11 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/26 13:08:04 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 13:36:26 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	get_commands(t_pipex *var);
 char	**get_path(char **env);
 int		valid_command(t_pipex *var, int cmd_nb);
 void	exec_command(t_pipex *var, int path_index, int cmd_index, char **env);
+void	close_all(t_pipex *var, int end[2]);
 
 #endif

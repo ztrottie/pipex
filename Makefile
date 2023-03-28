@@ -29,11 +29,8 @@ BONUS_SRCS	=	bonus.c \
 PIPEX_OBJS	=	$(addprefix ${BINDIR}, ${PIPEX_SRCS:.c=.o})
 BONUS_OBJS	=	$(addprefix ${BINDIR}, ${BONUS_SRCS:.c=.o})
 
-all: $(BINDIR) libft files $(NAME)
+all: $(BINDIR) libft $(NAME)
 	@echo "Pipex compiled"
-
-files:
-	@touch infile
 
 ${BINDIR}%.o: ${PIPEX_DIR}%.c
 	@${CC} ${CFLAGS} -c $< -o $@
@@ -48,7 +45,7 @@ $(NAME): $(PIPEX_OBJS)
 $(BINDIR):
 	@mkdir -p bin
 
-bonus: $(BINDIR) libft files $(NAME2)
+bonus: $(BINDIR) libft $(NAME2)
 	@echo "Pipex Bonus compiled"
 
 $(NAME2): $(BONUS_OBJS)
@@ -59,13 +56,12 @@ libft:
 	@$(MAKE) -C libft
 
 clean:
-	@rm -fr $(BINDIR) infile outfile
+	@rm -fr $(BINDIR)
 	@$(MAKE) -C libft clean
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(NAME2)
-	@rm -f infile
 	@$(MAKE) -C libft fclean
 
 re: clean all

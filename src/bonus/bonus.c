@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:06:00 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 16:34:29 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:26:07 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static void	parent_process(t_pipex *var)
 		unlink("/tmp/.infile");
 	while (ptr != NULL)
 	{
-		waitpid(ptr->pid, &status, 0);
+		if (waitpid(ptr->pid, &status, 0) == -1)
+			ft_exit("child", var);
 		ptr = ptr->next;
 	}
 	ft_exit(NULL, var);
@@ -87,7 +88,7 @@ int	main(int argc, char **argv, char **env)
 	else
 		argc_limit = 5;
 	if (argc < argc_limit)
-		return (0);
+		return (ft_putstr_fd("Not enough arguments\n", 2), 0);
 	set_variables(&var, argc, argv, env);
 	pipex(&var);
 }

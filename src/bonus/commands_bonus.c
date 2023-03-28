@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:12:02 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 12:22:31 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:21:05 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,15 @@ static int	get_start(t_pipex *var)
 	if (var->here_doc == 1)
 	{
 		var->cmd = ft_calloc(var->argc - 4, sizeof(char *));
+		if (!var->cmd)
+			ft_exit("calloc", var);
 		return (3);
 	}
 	else
 	{
 		var->cmd = ft_calloc(var->argc - 3, sizeof(char *));
+		if (!var->cmd)
+			ft_exit("calloc", var);
 		return (2);
 	}
 }

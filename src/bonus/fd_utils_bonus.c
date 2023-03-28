@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 11:35:23 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 16:34:53 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:28:18 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	close_all(t_pipex *var)
 {
 	int	i;
-	
+
 	close(var->infile);
 	close(var->outfile);
 	i = 0;
@@ -29,42 +29,53 @@ void	close_all(t_pipex *var)
 
 void	get_in_out(t_pipex *var, int index)
 {
+	int	error;
+
 	if (index == 0)
 	{
 		if (var->infile < 0)
 			ft_exit(var->argv[1], var);
-		dup2(var->infile, STDIN_FILENO);
-		dup2(var->pipe[index][1], STDOUT_FILENO);
+		error = dup2(var->infile, STDIN_FILENO);
+		error = dup2(var->pipe[index][1], STDOUT_FILENO);
 	}
 	else if (index < var->cmd_count - 1)
 	{
-		dup2(var->pipe[index - 1][0], STDIN_FILENO);
-		dup2(var->pipe[index][1], STDOUT_FILENO);
+		error = dup2(var->pipe[index - 1][0], STDIN_FILENO);
+		error = dup2(var->pipe[index][1], STDOUT_FILENO);
 	}
 	else
 	{
-		dup2(var->pipe[index - 1][0], STDIN_FILENO);
-		dup2(var->outfile, STDOUT_FILENO);
+		error = dup2(var->pipe[index - 1][0], STDIN_FILENO);
+		error = dup2(var->outfile, STDOUT_FILENO);
 	}
 	close_all(var);
+	if (error == -1)
+		ft_exit("dup2", var);
 }
 
 void	open_fd(t_pipex *var)
 {
 	if (ft_strncmp(var->argv[1], "here_doc\0", 9) == 0)
 	{
-		var->outfile = open(var->argv[var->argc - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
+		var->outfile = open(var->argv[var->argc - 1], \
+		O_RDWR | O_CREAT | O_APPEND, 0644);
 		if (var->outfile < 0)
 			ft_exit(var->argv[var->argc - 1], var);
-		var->infile = open("/tmp/.infile", O_RDWR | O_CREAT);
+		var->infile = open("/tmp/.infile", \
+		O_RDWR | O_CREAT, 0644);
+		if (var->infile < 0)
+			ft_exit("here_doc", var);
 		var->here_doc = 1;
 	}
 	else
 	{
-		var->outfile = open(var->argv[var->argc - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+		var->outfile = open(var->argv[var->argc - 1], \
+		O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (var->outfile < 0)
 			ft_exit(var->argv[var->argc - 1], var);
 		var->infile = open(var->argv[1], O_RDONLY);
+		if (var->infile < 0)
+			ft_exit(var->argv[1], var);
 	}
 }
 

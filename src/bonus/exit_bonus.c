@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:12:32 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/27 14:44:07 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:27:24 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	free_all(t_pipex *var)
 {
 	int	i;
-	
+
 	if (var->pid_list != NULL)
 		pid_list_free(var);
 	ft_free(var->cmd);

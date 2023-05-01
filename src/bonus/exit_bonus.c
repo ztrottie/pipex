@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
+/*   By: ztrottie <ztrottie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 14:12:32 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/28 12:27:24 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:37:04 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	free_all(t_pipex *var)
 void	ft_exit(char *error, t_pipex *var)
 {
 	free_all(var);
+	close_all(var);
 	if (error != NULL)
 	{
 		perror(error);

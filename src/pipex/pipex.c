@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
+/*   By: ztrottie <ztrottie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 11:36:53 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/28 13:36:35 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/05/01 14:41:49 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ static void	child_process(t_pipex *var, int end[2], char **env)
 {
 	int	cmd_path_index;
 
+	if (var->infile < 0)
+		ft_exit(var->argv[1], var);
 	if (dup2(var->infile, STDIN_FILENO) < 0)
 		ft_exit("dup2:", var);
 	if (dup2(end[1], STDOUT_FILENO) < 0)

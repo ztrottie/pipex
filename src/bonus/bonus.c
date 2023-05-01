@@ -6,7 +6,7 @@
 /*   By: ztrottie <zakytrottier@hotmail.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/26 15:06:00 by ztrottie          #+#    #+#             */
-/*   Updated: 2023/03/28 12:26:07 by ztrottie         ###   ########.fr       */
+/*   Updated: 2023/04/16 13:58:52 by ztrottie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	set_variables(t_pipex *var, int argc, char **argv, char **env)
 	var->argc = argc;
 	var->argv = argv;
 	var->env = env;
-	open_fd(var);
-	if (var->here_doc == 1)
+	if (ft_strncmp(argv[1], "here_doc\0", 9) == 0)
 		get_input(var);
+	open_fd(var);
 	get_commands(var);
 	var->path = get_path(var->env);
 	if (var->path == NULL)
